@@ -1,0 +1,33 @@
+.button {
+  border: none;
+  outline: none;
+  padding-inline: 1.5rem;
+  padding-block: 0.75rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.button.primaryButton {
+  background-color: #D75829;
+  color: white;
+}
+.button:active {
+  transform: scale(0.9);
+}
+.button:hover {
+  box-shadow: 0 0 15px #ff4a08;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  background-color: #212121;
+  color: whitesmoke;
+}/*# sourceMappingURL=style.css.map */

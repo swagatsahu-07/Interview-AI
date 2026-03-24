@@ -1,0 +1,411 @@
+// NO @use needed — this file uses zero variables/mixins from style.scss
+
+/* ─────────────────────────────────────────────────────────────
+   ALL rules scoped under [data-page="home"] so that
+   interview.scss's .sidebar rules can NEVER bleed in here.
+───────────────────────────────────────────────────────────── */
+
+[data-page="home"] {
+
+  /* ── Layout ── */
+  &.homeLayout {
+    display: flex;
+    height: 100vh;
+    position: relative;
+  }
+
+  /* ── Overlay ── */
+  .homeOverlay {
+    display: none;
+    pointer-events: none;
+  }
+
+  /* ── Hamburger — hidden on desktop ── */
+  .homeHamburger {
+    display: none;
+  }
+
+  /* ── Sidebar ── */
+  .homeSidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background: #0d1117;
+    border-right: 1px solid rgba(79, 142, 247, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    color: #e6edf3;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      padding-right: 2rem;
+      color: #e6edf3;
+    }
+  }
+
+  .homeSidebarClose {
+    display: none;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: #8b9ab3;
+    font-size: 1.4rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0.2rem;
+    border-radius: 4px;
+    transition: color 0.2s;
+
+    &:hover { color: #e6edf3; }
+  }
+
+  .homeSidebarHistory {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .homeSidebarItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #8b9ab3;
+    transition: 0.2s;
+
+    &:hover {
+      background: rgba(79, 142, 247, 0.08);
+      color: #e6edf3;
+    }
+  }
+
+  .homeSidebarTitle {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .homeSidebarDelete {
+    font-size: 0.9rem;
+    color: #4f8ef7;
+    cursor: pointer;
+    opacity: 0;
+    flex-shrink: 0;
+    margin-left: 0.4rem;
+    transition: 0.2s;
+
+    .homeSidebarItem:hover & { opacity: 1; }
+    &:hover { color: #93c5fd; transform: scale(1.1); }
+  }
+
+  .homeSidebarEmpty {
+    font-size: 0.8rem;
+    color: #8b9ab3;
+  }
+
+  .homeSidebarTopBar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: auto;
+
+    span { font-size: 0.85rem; color: #8b9ab3; }
+    strong { color: #e6edf3; }
+  }
+
+  .homeSidebarLogout {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: none;
+    background: linear-gradient(135deg, #4f8ef7, #2563eb);
+    color: #e6edf3;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: 0.2s;
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(79, 142, 247, 0.4);
+    }
+  }
+
+  /* ── Main ── */
+  .homeMain {
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: radial-gradient(circle at top, #161b27, #0d1117);
+    color: #e6edf3;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .homeContainer {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .homeHeader {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .homeQuote {
+    font-size: 2rem;
+    color: #e6edf3;
+    margin-top: 0.5rem;
+  }
+
+  .homeCard {
+    display: flex;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    background: rgba(79, 142, 247, 0.06);
+    border-radius: 16px;
+    border: 1px solid rgba(79, 142, 247, 0.15);
+    backdrop-filter: blur(20px);
+  }
+
+  .homeLeft,
+  .homeRight {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .homeRight { gap: 0.6rem; }
+
+  .homeSectionTitle {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #e6edf3;
+  }
+
+  .homeRequired {
+    color: #4f8ef7;
+    margin-left: 0.4rem;
+    font-size: 0.7rem;
+  }
+
+  .homeHelper {
+    font-size: 0.75rem;
+    color: #8b9ab3;
+    margin-top: 0.3rem;
+  }
+
+  .homeTextarea {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: 1px solid rgba(79, 142, 247, 0.2);
+    background: rgba(13, 17, 23, 0.8);
+    color: #e6edf3;
+    resize: none;
+    outline: none;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    font-family: inherit;
+
+    &::placeholder { color: #8b9ab3; }
+    &:focus {
+      border-color: #4f8ef7;
+      box-shadow: 0 0 0 1px rgba(79, 142, 247, 0.3);
+    }
+  }
+
+  .homeTextarea--tall { min-height: 300px; }
+  .homeTextarea--short { height: 110px; }
+
+  .homeUploadBox {
+    height: 100px;
+    border: 1px dashed rgba(79, 142, 247, 0.3);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(13, 17, 23, 0.5);
+    transition: border-color 0.2s, background 0.2s;
+
+    &:hover {
+      border-color: #4f8ef7;
+      background: rgba(79, 142, 247, 0.08);
+    }
+
+    p { font-size: 0.82rem; margin: 0; }
+    small { color: #8b9ab3; font-size: 0.7rem; }
+  }
+
+  .homeUploadIcon {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    color: #4f8ef7;
+  }
+
+  .homeFileName {
+    font-size: 0.8rem;
+    color: #8b9ab3;
+    text-align: center;
+    word-break: break-all;
+  }
+
+  .homeNote {
+    font-size: 0.72rem;
+    color: #8b9ab3;
+    background: rgba(79, 142, 247, 0.08);
+    padding: 0.45rem;
+    border-radius: 8px;
+  }
+
+  .homeError {
+    font-size: 0.8rem;
+    color: #f87171;
+    margin: 0;
+  }
+
+  .homeGenerateBtn {
+    margin-top: auto;
+    padding: 0.85rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #4f8ef7, #2563eb);
+    color: #e6edf3;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: box-shadow 0.2s;
+
+    &:hover { box-shadow: 0 8px 20px rgba(79, 142, 247, 0.4); }
+  }
+
+  /* ── Hide scrollbars ── */
+  .homeSidebar,
+  .homeSidebarHistory,
+  .homeMain {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  /* ════════════════════════════════════════════
+     ≤ 1024px
+  ════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .homeMain { padding: 1.2rem; }
+    .homeHeader { margin-bottom: 3rem; }
+    .homeQuote { font-size: 1.6rem; }
+    .homeCard { gap: 1rem; padding: 1rem; }
+    .homeTextarea--tall { min-height: 220px; }
+  }
+
+  /* ════════════════════════════════════════════
+     ≤ 768px  — MOBILE DRAWER
+  ════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    .homeHamburger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0.9rem;
+      left: 0.9rem;
+      z-index: 900;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 8px;
+      border: 1px solid rgba(79, 142, 247, 0.25);
+      background: rgba(13, 17, 23, 0.97);
+      color: #e6edf3;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover { background: rgba(79, 142, 247, 0.2); }
+    }
+
+    .homeOverlay {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9998;
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .homeOverlay--visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .homeSidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100dvh;
+      width: 270px;
+      z-index: 10000;
+      transform: translateX(-100%);
+      visibility: hidden;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
+      box-shadow: none;
+    }
+
+    .homeSidebar--open {
+      transform: translateX(0);
+      visibility: visible;
+      box-shadow: 6px 0 32px rgba(0, 0, 0, 0.7);
+    }
+
+    .homeSidebarClose { display: flex; }
+
+    .homeMain { padding: 1rem; padding-top: 4rem; }
+    .homeHeader { margin-bottom: 2rem; }
+    .homeQuote { font-size: 1.35rem; }
+    .homeCard { flex-direction: column; gap: 1rem; padding: 1rem; }
+    .homeTextarea--tall { min-height: 160px; }
+    .homeTextarea--short { height: 100px; }
+  }
+
+  /* ════════════════════════════════════════════
+     ≤ 480px
+  ════════════════════════════════════════════ */
+  @media (max-width: 480px) {
+    .homeSidebar { width: min(85vw, 300px); }
+
+    .homeMain { padding: 0.75rem; padding-top: 3.8rem; }
+    .homeHeader { margin-bottom: 1.5rem; }
+    .homeQuote { font-size: 1.1rem; line-height: 1.4; }
+    .homeCard { padding: 0.75rem; border-radius: 12px; gap: 0.85rem; }
+    .homeSectionTitle { font-size: 0.8rem; }
+    .homeTextarea { font-size: 0.85rem; padding: 0.6rem; }
+    .homeTextarea--tall { min-height: 130px; }
+    .homeTextarea--short { height: 90px; }
+    .homeUploadBox { height: 85px; p { font-size: 0.78rem; } }
+    .homeGenerateBtn { font-size: 0.85rem; padding: 0.75rem; }
+  }
+}

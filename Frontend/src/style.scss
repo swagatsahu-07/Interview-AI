@@ -1,0 +1,41 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  background-color: #0d1117;
+  color: #e6edf3;
+  font-family: 'Sora';
+}
+
+/* 🔥 BREAKPOINTS */
+$mobile: 768px;
+$tablet: 1024px;
+$small-height: 700px;
+
+/* 🔹 MOBILE */
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
+    @content;
+  }
+}
+
+/* 🔹 TABLET */
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+
+/* 🔹 HEIGHT BASED */
+@mixin smallHeight {
+  @media (max-height: #{$small-height}) {
+    @content;
+  }
+}
