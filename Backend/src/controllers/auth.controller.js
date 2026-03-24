@@ -47,7 +47,11 @@ async function registerUserController(req, res) {
     { expiresIn: "1d" },
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true, // 🔥 REQUIRED (Render uses HTTPS)
+    sameSite: "none", // 🔥 REQUIRED (cross-origin)
+  });
   res.status(201).json({
     message: "User Registered Successfully",
     user: {
@@ -68,7 +72,7 @@ async function loginUserController(req, res) {
   const user = await userModel.findOne({ email });
 
   if (!user) {
-    return res.status(400).json( {
+    return res.status(400).json({
       message: "Invalid email or password",
     });
   }
@@ -86,7 +90,11 @@ async function loginUserController(req, res) {
     { expiresIn: "1d" },
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true, // 🔥 REQUIRED (Render uses HTTPS)
+    sameSite: "none", // 🔥 REQUIRED (cross-origin)
+  });
   res.status(201).json({
     message: "Login Successfull",
     user: {
@@ -114,23 +122,21 @@ async function logoutUserController(req, res) {
   });
 }
 
-
 /** @route POST /api/auth/get-me
  * @desc Get the details of the logged in user
  * @access Public
  */
 async function getMeController(req, res) {
-   
   const user = await userModel.findById(req.user.id);
 
   res.status(200).json({
     message: "User Fetched Successfully",
-    user:{
+    user: {
       id: user.id,
       userName: user.userName,
-      email: user.email
-    }
-  })
+      email: user.email,
+    },
+  });
 }
 
 module.exports = {
