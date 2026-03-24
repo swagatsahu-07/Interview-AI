@@ -98,8 +98,8 @@ CORRECT FORMAT EXAMPLE:
 
 MANDATORY RULES:
 
-- Include at least 3 technical questions
-- Include at least 3 behavioral questions
+- Include at least 5 technical questions
+- Include at least 5 behavioral questions
 - Preparation plan MUST have exactly 7 days
 - Each day must include multiple tasks
 - Skill gaps must be realistic
