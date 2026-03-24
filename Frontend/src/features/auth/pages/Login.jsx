@@ -20,7 +20,7 @@ const Login = () => {
     }
   };
 
-  if (loading) return <Loader text="Loading..." />;
+  if (loading) return <Loader text="Waking up server... please wait ⏳" />;
 
   return (
     <main>
