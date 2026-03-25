@@ -10,7 +10,7 @@ app.use(cookieParser());
 app.use(cors({
   origin:  [
     "http://localhost:5173",
-    "https://interview-ai-ruby-beta.vercel.app/"
+    "https://interview-ai-ruby-beta.vercel.app"
   ],
   credentials: true
 }))
