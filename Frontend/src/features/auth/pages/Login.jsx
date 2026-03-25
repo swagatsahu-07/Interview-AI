@@ -9,16 +9,18 @@ const Login = () => {
   const { loading, handleLogin } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const success = await handleLogin({ email, password });
-    if (success) {
-      navigate('/home');
-    } else {
-      alert("Invalid credentials");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  const result = await handleLogin({ email, password });
+  if (result.success) {
+    navigate('/home');
+  } else {
+    setError(result.message); // ✅ "Invalid email or password" dikhega
+  }
+};
+
 
   if (loading) return <Loader text="Waking up server... please wait ⏳" />;
 
@@ -86,7 +88,7 @@ const Login = () => {
               required
             />
           </div>
-
+          {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
           <button className="button primaryButton" type="submit">Login</button>
           <p>Don't have an account? <Link to="/register">Register Here</Link></p>
         </form>

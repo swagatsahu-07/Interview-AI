@@ -6,31 +6,33 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
   const { user, setUser, loading, setLoading } = context;
 
-  const handleLogin = async ({ email, password }) => {
-    setLoading(true);
-    try {
-      const data = await login({ email, password });
-      setUser(data.user);
-      return true;
-    } catch (error) {
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  };
+ const handleLogin = async ({ email, password }) => {
+  setLoading(true);
+  try {
+    const data = await login({ email, password });
+    setUser(data.user);
+    return { success: true };
+  } catch (error) {
+    const message = error.response?.data?.message || "Something went wrong";
+    return { success: false, message };
+  } finally {
+    setLoading(false);
+  }
+};
 
-  const handleRegister = async ({ userName, email, password }) => {
-    setLoading(true);
-    try {
-      const data = await register({ userName, email, password });
-      setUser(data.user);
-      return true;
-    } catch (error) {
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  };
+const handleRegister = async ({ userName, email, password }) => {
+  setLoading(true);
+  try {
+    const data = await register({ userName, email, password });
+    setUser(data.user);
+    return { success: true };
+  } catch (error) {
+    const message = error.response?.data?.message || "Something went wrong";
+    return { success: false, message };
+  } finally {
+    setLoading(false);
+  }
+};
 
  const handleLogout = async () => {
   setLoading(true);

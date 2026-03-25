@@ -10,16 +10,17 @@ const Register = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const success = await handleRegister({ userName, email, password });
-    if (success) {
-      navigate('/home');
-    } else {
-      alert("Invalid credentials");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  const result = await handleRegister({ userName, email, password });
+  if (result.success) {
+    navigate('/home');
+  } else {
+    setError(result.message);
+  }
+};
 
   if (loading) return <Loader text="Loading..." />;
 
@@ -97,6 +98,7 @@ const Register = () => {
               required
             />
           </div>
+          {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
           <button className="button primaryButton" type="submit">Register</button>
           <p>Already have an account? <Link to="/login">Login Here</Link></p>
         </form>
