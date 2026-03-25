@@ -32,21 +32,3 @@ export async function getMe() {
   const response = await api.get("/api/auth/get-me");
   return response.data;
 }
-
-export async function logout() {
-  try {
-    const response = await api.get("/api/auth/logout");
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export async function getMe() { 
-  try {
-    const response = await api.get("/api/auth/get-me");
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
