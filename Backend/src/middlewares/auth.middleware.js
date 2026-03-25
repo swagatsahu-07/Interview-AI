@@ -1,32 +1,27 @@
 const jwt = require("jsonwebtoken");
 const tokenBlacklistModel = require('../models/blacklist.model');
 
-
 async function authUser(req, res, next) {
-  const token = req.cookies.token;
+  // ✅ Cookie aur Authorization header dono check karo
+  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-    return res.status(401).json({message: "token not provided."})
+    return res.status(401).json({ message: "token not provided." });
   }
 
-  const isTokenBlacklisted = await tokenBlacklistModel.findOne({token})
+  const isTokenBlacklisted = await tokenBlacklistModel.findOne({ token });
 
-  if(isTokenBlacklisted){
-    return res.status(401).json({
-      message: "Token is Invalid"
-    })
+  if (isTokenBlacklisted) {
+    return res.status(401).json({ message: "Token is Invalid" });
   }
 
- try {
-   const decoded = jwt.verify(token, process.env.JWT_SECRET);
-   req.user = decoded;
-   next();
- } catch (error) {
-   return res.status(401).json({message: "Invalid Token."})
- }
-
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: "Invalid Token." });
+  }
 }
 
-module.exports = {
-  authUser
-}
+module.exports = { authUser };

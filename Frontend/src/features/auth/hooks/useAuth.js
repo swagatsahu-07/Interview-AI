@@ -6,55 +6,56 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
   const { user, setUser, loading, setLoading } = context;
 
- const handleLogin = async ({ email, password }) => {
-  setLoading(true);
-  try {
-    const data = await login({ email, password });
-    setUser(data.user);
-    return { success: true };
-  } catch (error) {
-    const message = error.response?.data?.message || "Something went wrong";
-    return { success: false, message };
-  } finally {
-    setLoading(false);
-  }
-};
+  const handleLogin = async ({ email, password }) => {
+    setLoading(true);
+    try {
+      const data = await login({ email, password });
+      setUser(data.user);
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || "Something went wrong";
+      return { success: false, message };
+    } finally {
+      setLoading(false);
+    }
+  };
 
-const handleRegister = async ({ userName, email, password }) => {
-  setLoading(true);
-  try {
-    const data = await register({ userName, email, password });
-    setUser(data.user);
-    return { success: true };
-  } catch (error) {
-    const message = error.response?.data?.message || "Something went wrong";
-    return { success: false, message };
-  } finally {
-    setLoading(false);
-  }
-};
+  const handleRegister = async ({ userName, email, password }) => {
+    setLoading(true);
+    try {
+      const data = await register({ userName, email, password });
+      setUser(data.user);
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || "Something went wrong";
+      return { success: false, message };
+    } finally {
+      setLoading(false);
+    }
+  };
 
- const handleLogout = async () => {
-  setLoading(true);
-  try {
-    await logout(); 
-    setUser(null);  
-  } catch (error) {
-  } finally {
-    setLoading(false);
-  }
-};
+  const handleLogout = async () => {
+    setLoading(true);
+    try {
+      await logout();
+      setUser(null);
+      localStorage.removeItem("token"); // ✅ logout pe token clear karo
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const getAndSetUser = async () => {
       try {
         const data = await getMe();
         setUser(data.user);
-      } catch (error) {} finally{
-
+      } catch (error) {
+        localStorage.removeItem("token"); // ✅ invalid token hone pe clear karo
+      } finally {
         setLoading(false);
       }
-
     };
     getAndSetUser();
   }, []);

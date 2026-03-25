@@ -1,17 +1,20 @@
 import axios from "axios";
 
-
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 });
 
+// ✅ Har request mein token automatically add hoga
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
-/**
- * 
- * @description Generate an interview report based on candidate information
- */
-export const generateInterviewReport = async ({selfDescription, jobDescription, resumeFile}) => {
+export const generateInterviewReport = async ({ selfDescription, jobDescription, resumeFile }) => {
   const formData = new FormData();
   formData.append("selfDescription", selfDescription);
   formData.append("jobDescription", jobDescription);
@@ -24,28 +27,18 @@ export const generateInterviewReport = async ({selfDescription, jobDescription, 
   });
 
   return response.data;
-}
+};
 
-
-/**
- * @description Get interview report by interviewId    
-*/
 export const getInterviewReportById = async (interviewId) => {
   const response = await api.get(`/api/interview/report/${interviewId}`);
   return response.data;
-}
+};
 
-/**
- * @description Get all the interview reports for the logged in user.
- */
 export const getAllInterviewReports = async () => {
   const response = await api.get("/api/interview/");
   return response.data;
-}
+};
 
-/**
- * @description Delete an interview report by id. 
- */
 export const deleteReport = async (id) => {
   const res = await api.delete(`/api/interview/${id}`);
   return res.data;

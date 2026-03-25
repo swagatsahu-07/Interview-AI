@@ -3,10 +3,6 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
 const tokenBlacklistModel = require("../models/blacklist.model");
 
-/** * @route POST /api/auth/register
- * @desc Register a new user
- * @access Public
- */
 async function registerUserController(req, res) {
   const { userName, email, password } = req.body;
 
@@ -22,15 +18,8 @@ async function registerUserController(req, res) {
 
   if (isUserAlreadyExists) {
     return isUserAlreadyExists.userName == userName
-      ? res.status(400).json({
-          message: "Username already taken",
-        })
-      : res.status(400).json({
-          message: "Account already exists with this email address",
-        });
-    // return res.status(400).json({
-    //   message : 'User Already exists'
-    // })
+      ? res.status(400).json({ message: "Username already taken" })
+      : res.status(400).json({ message: "Account already exists with this email address" });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -44,18 +33,21 @@ async function registerUserController(req, res) {
   const token = jwt.sign(
     { id: user._id, userName: user.userName },
     process.env.JWT_SECRET,
-    { expiresIn: "1d" },
+    { expiresIn: "1d" }
   );
 
+  // ✅ Cookie + token dono bhejo
   res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  path: "/",
-  maxAge: 24 * 60 * 60 * 1000,
-});
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+
   res.status(201).json({
     message: "User Registered Successfully",
+    token, // ← add kiya
     user: {
       id: user._id,
       userName: user.userName,
@@ -64,43 +56,38 @@ async function registerUserController(req, res) {
   });
 }
 
-/** @route POST /api/auth/login
- * @desc Login a user
- * @access Public
- */
 async function loginUserController(req, res) {
   const { email, password } = req.body;
 
   const user = await userModel.findOne({ email });
 
   if (!user) {
-    return res.status(400).json({
-      message: "Invalid email or password",
-    });
+    return res.status(400).json({ message: "Invalid email or password" });
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    return res.status(400).json({
-      message: "Invalid email or password",
-    });
+    return res.status(400).json({ message: "Invalid email or password" });
   }
 
   const token = jwt.sign(
     { id: user._id, userName: user.userName },
     process.env.JWT_SECRET,
-    { expiresIn: "1d" },
+    { expiresIn: "1d" }
   );
 
- res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  path: "/",
-  maxAge: 24 * 60 * 60 * 1000,
-});
+  // ✅ Cookie + token dono bhejo
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+
   res.status(201).json({
     message: "Login Successfull",
+    token, // ← add kiya
     user: {
       id: user._id,
       userName: user.userName,
@@ -109,33 +96,26 @@ async function loginUserController(req, res) {
   });
 }
 
-/** @route POST /api/auth/logout
- * @desc Logout a user and add the token in blacklist
- * @access Public
- */
 async function logoutUserController(req, res) {
-  const token = req.cookies.token;
+  // Cookie aur header dono se token lo
+  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   if (token) {
     await tokenBlacklistModel.create({ token });
   }
 
   res.clearCookie("token", {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  path: "/",
-  maxAge: 24 * 60 * 60 * 1000,
-});
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
+  });
+
   res.status(200).json({
-    message: "USer Logout Successfullly",
+    message: "User Logout Successfully",
   });
 }
 
-/** @route POST /api/auth/get-me
- * @desc Get the details of the logged in user
- * @access Public
- */
 async function getMeController(req, res) {
   const user = await userModel.findById(req.user.id);
 
