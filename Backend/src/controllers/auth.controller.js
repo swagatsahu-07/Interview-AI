@@ -52,6 +52,7 @@ async function registerUserController(req, res) {
   secure: true,
   sameSite: "none",
   path: "/",
+  maxAge: 24 * 60 * 60 * 1000,
 });
   res.status(201).json({
     message: "User Registered Successfully",
@@ -96,6 +97,7 @@ async function loginUserController(req, res) {
   secure: true,
   sameSite: "none",
   path: "/",
+  maxAge: 24 * 60 * 60 * 1000,
 });
   res.status(201).json({
     message: "Login Successfull",
@@ -123,6 +125,7 @@ async function logoutUserController(req, res) {
   secure: true,
   sameSite: "none",
   path: "/",
+  maxAge: 24 * 60 * 60 * 1000,
 });
   res.status(200).json({
     message: "USer Logout Successfullly",
