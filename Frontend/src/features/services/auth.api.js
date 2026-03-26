@@ -29,12 +29,12 @@ export async function login({ email, password }) {
     email,
     password,
   });
-  localStorage.setItem("token", response.data.token); // ✅ token save karo
+  localStorage.setItem("token", response.data.token); 
   return response.data;
 }
 
 export async function logout() {
-  localStorage.removeItem("token"); // ✅ token remove karo
+  localStorage.removeItem("token"); 
   const response = await api.get("/api/auth/logout");
   return response.data;
 }

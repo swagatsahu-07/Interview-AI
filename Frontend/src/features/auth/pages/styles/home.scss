@@ -6,7 +6,6 @@
 ───────────────────────────────────────────────────────────── */
 
 [data-page="home"] {
-
   /* ── Layout ── */
   &.homeLayout {
     display: flex;
@@ -66,7 +65,9 @@
     border-radius: 4px;
     transition: color 0.2s;
 
-    &:hover { color: #e6edf3; }
+    &:hover {
+      color: #e6edf3;
+    }
   }
 
   .homeSidebarHistory {
@@ -107,8 +108,13 @@
     margin-left: 0.4rem;
     transition: 0.2s;
 
-    .homeSidebarItem:hover & { opacity: 1; }
-    &:hover { color: #93c5fd; transform: scale(1.1); }
+    .homeSidebarItem:hover & {
+      opacity: 1;
+    }
+    &:hover {
+      color: #93c5fd;
+      transform: scale(1.1);
+    }
   }
 
   .homeSidebarEmpty {
@@ -122,8 +128,13 @@
     gap: 0.8rem;
     margin-top: auto;
 
-    span { font-size: 0.85rem; color: #8b9ab3; }
-    strong { color: #e6edf3; }
+    span {
+      font-size: 0.85rem;
+      color: #8b9ab3;
+    }
+    strong {
+      color: #e6edf3;
+    }
   }
 
   .homeSidebarLogout {
@@ -190,7 +201,9 @@
     flex-direction: column;
   }
 
-  .homeRight { gap: 0.6rem; }
+  .homeRight {
+    gap: 0.6rem;
+  }
 
   .homeSectionTitle {
     font-size: 0.85rem;
@@ -224,15 +237,21 @@
     box-sizing: border-box;
     font-family: inherit;
 
-    &::placeholder { color: #8b9ab3; }
+    &::placeholder {
+      color: #8b9ab3;
+    }
     &:focus {
       border-color: #4f8ef7;
       box-shadow: 0 0 0 1px rgba(79, 142, 247, 0.3);
     }
   }
 
-  .homeTextarea--tall { min-height: 300px; }
-  .homeTextarea--short { height: 110px; }
+  .homeTextarea--tall {
+    min-height: 300px;
+  }
+  .homeTextarea--short {
+    height: 110px;
+  }
 
   .homeUploadBox {
     height: 100px;
@@ -244,15 +263,23 @@
     align-items: center;
     cursor: pointer;
     background: rgba(13, 17, 23, 0.5);
-    transition: border-color 0.2s, background 0.2s;
+    transition:
+      border-color 0.2s,
+      background 0.2s;
 
     &:hover {
       border-color: #4f8ef7;
       background: rgba(79, 142, 247, 0.08);
     }
 
-    p { font-size: 0.82rem; margin: 0; }
-    small { color: #8b9ab3; font-size: 0.7rem; }
+    p {
+      font-size: 0.82rem;
+      margin: 0;
+    }
+    small {
+      color: #8b9ab3;
+      font-size: 0.7rem;
+    }
   }
 
   .homeUploadIcon {
@@ -295,7 +322,9 @@
     font-family: inherit;
     transition: box-shadow 0.2s;
 
-    &:hover { box-shadow: 0 8px 20px rgba(79, 142, 247, 0.4); }
+    &:hover {
+      box-shadow: 0 8px 20px rgba(79, 142, 247, 0.4);
+    }
   }
 
   /* ── Hide scrollbars ── */
@@ -305,25 +334,37 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
 
-    &::-webkit-scrollbar { display: none; }
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   /* ════════════════════════════════════════════
      ≤ 1024px
   ════════════════════════════════════════════ */
   @media (max-width: 1024px) {
-    .homeMain { padding: 1.2rem; }
-    .homeHeader { margin-bottom: 3rem; }
-    .homeQuote { font-size: 1.6rem; }
-    .homeCard { gap: 1rem; padding: 1rem; }
-    .homeTextarea--tall { min-height: 220px; }
+    .homeMain {
+      padding: 1.2rem;
+    }
+    .homeHeader {
+      margin-bottom: 3rem;
+    }
+    .homeQuote {
+      font-size: 1.6rem;
+    }
+    .homeCard {
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .homeTextarea--tall {
+      min-height: 220px;
+    }
   }
 
   /* ════════════════════════════════════════════
      ≤ 768px  — MOBILE DRAWER
   ════════════════════════════════════════════ */
   @media (max-width: 768px) {
-
     .homeHamburger {
       display: flex;
       align-items: center;
@@ -342,7 +383,9 @@
       cursor: pointer;
       transition: background 0.2s;
 
-      &:hover { background: rgba(79, 142, 247, 0.2); }
+      &:hover {
+        background: rgba(79, 142, 247, 0.2);
+      }
     }
 
     .homeOverlay {
@@ -371,7 +414,9 @@
       z-index: 10000;
       transform: translateX(-100%);
       visibility: hidden;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
+      transition:
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0.3s;
       box-shadow: none;
     }
 
@@ -380,32 +425,83 @@
       visibility: visible;
       box-shadow: 6px 0 32px rgba(0, 0, 0, 0.7);
     }
+    .homeSidebarDelete {
+      opacity: 1;
+    }
 
-    .homeSidebarClose { display: flex; }
+    .homeSidebarClose {
+      display: flex;
+    }
 
-    .homeMain { padding: 1rem; padding-top: 4rem; }
-    .homeHeader { margin-bottom: 2rem; }
-    .homeQuote { font-size: 1.35rem; }
-    .homeCard { flex-direction: column; gap: 1rem; padding: 1rem; }
-    .homeTextarea--tall { min-height: 160px; }
-    .homeTextarea--short { height: 100px; }
+    .homeMain {
+      padding: 1rem;
+      padding-top: 4rem;
+    }
+    .homeHeader {
+      margin-bottom: 2rem;
+    }
+    .homeQuote {
+      font-size: 1.35rem;
+    }
+    .homeCard {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .homeTextarea--tall {
+      min-height: 160px;
+    }
+    .homeTextarea--short {
+      height: 100px;
+    }
   }
 
   /* ════════════════════════════════════════════
      ≤ 480px
   ════════════════════════════════════════════ */
   @media (max-width: 480px) {
-    .homeSidebar { width: min(85vw, 300px); }
+    .homeSidebar {
+      width: min(85vw, 300px);
+    }
 
-    .homeMain { padding: 0.75rem; padding-top: 3.8rem; }
-    .homeHeader { margin-bottom: 1.5rem; }
-    .homeQuote { font-size: 1.1rem; line-height: 1.4; }
-    .homeCard { padding: 0.75rem; border-radius: 12px; gap: 0.85rem; }
-    .homeSectionTitle { font-size: 0.8rem; }
-    .homeTextarea { font-size: 0.85rem; padding: 0.6rem; }
-    .homeTextarea--tall { min-height: 130px; }
-    .homeTextarea--short { height: 90px; }
-    .homeUploadBox { height: 85px; p { font-size: 0.78rem; } }
-    .homeGenerateBtn { font-size: 0.85rem; padding: 0.75rem; }
+    .homeMain {
+      padding: 0.75rem;
+      padding-top: 3.8rem;
+    }
+    .homeHeader {
+      margin-bottom: 1.5rem;
+    }
+    .homeQuote {
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+    .homeCard {
+      padding: 0.75rem;
+      border-radius: 12px;
+      gap: 0.85rem;
+    }
+    .homeSectionTitle {
+      font-size: 0.8rem;
+    }
+    .homeTextarea {
+      font-size: 0.85rem;
+      padding: 0.6rem;
+    }
+    .homeTextarea--tall {
+      min-height: 130px;
+    }
+    .homeTextarea--short {
+      height: 90px;
+    }
+    .homeUploadBox {
+      height: 85px;
+      p {
+        font-size: 0.78rem;
+      }
+    }
+    .homeGenerateBtn {
+      font-size: 0.85rem;
+      padding: 0.75rem;
+    }
   }
 }

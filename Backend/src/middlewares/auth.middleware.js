@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const tokenBlacklistModel = require('../models/blacklist.model');
 
 async function authUser(req, res, next) {
-  // ✅ Cookie aur Authorization header dono check karo
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   if (!token) {

@@ -26,7 +26,6 @@ const Register = () => {
 
   return (
     <main>
-      {/* Animated background tips */}
       <div className="authBg">
         <div className="authBgGrid" />
         <div className="authBgGlow" />

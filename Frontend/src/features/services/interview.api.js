@@ -5,7 +5,7 @@ const api = axios.create({
   withCredentials: true,
 });
 
-// ✅ Har request mein token automatically add hoga
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {

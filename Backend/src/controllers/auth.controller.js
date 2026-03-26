@@ -36,7 +36,7 @@ async function registerUserController(req, res) {
     { expiresIn: "1d" }
   );
 
-  // ✅ Cookie + token dono bhejo
+
   res.cookie("token", token, {
     httpOnly: true,
     secure: true,
@@ -47,7 +47,7 @@ async function registerUserController(req, res) {
 
   res.status(201).json({
     message: "User Registered Successfully",
-    token, // ← add kiya
+    token, 
     user: {
       id: user._id,
       userName: user.userName,
@@ -76,7 +76,7 @@ async function loginUserController(req, res) {
     { expiresIn: "1d" }
   );
 
-  // ✅ Cookie + token dono bhejo
+ 
   res.cookie("token", token, {
     httpOnly: true,
     secure: true,
@@ -87,7 +87,7 @@ async function loginUserController(req, res) {
 
   res.status(201).json({
     message: "Login Successfull",
-    token, // ← add kiya
+    token, 
     user: {
       id: user._id,
       userName: user.userName,
@@ -97,7 +97,7 @@ async function loginUserController(req, res) {
 }
 
 async function logoutUserController(req, res) {
-  // Cookie aur header dono se token lo
+
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   if (token) {

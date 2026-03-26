@@ -39,7 +39,7 @@ export const useAuth = () => {
     try {
       await logout();
       setUser(null);
-      localStorage.removeItem("token"); // ✅ logout pe token clear karo
+      localStorage.removeItem("token"); 
     } catch (error) {
     } finally {
       setLoading(false);
@@ -52,7 +52,7 @@ export const useAuth = () => {
         const data = await getMe();
         setUser(data.user);
       } catch (error) {
-        localStorage.removeItem("token"); // ✅ invalid token hone pe clear karo
+        localStorage.removeItem("token");
       } finally {
         setLoading(false);
       }

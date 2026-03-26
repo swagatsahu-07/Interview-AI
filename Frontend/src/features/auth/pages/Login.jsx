@@ -17,7 +17,7 @@ const Login = () => {
   if (result.success) {
     navigate('/home');
   } else {
-    setError(result.message); // ✅ "Invalid email or password" dikhega
+    setError(result.message); // 
   }
 };
 
